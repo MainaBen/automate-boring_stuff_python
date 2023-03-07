@@ -7,6 +7,8 @@ Several functions for working with PDFs in python
 5. Get the last page of a PDF
 6. Merge several PDFs
 7. Rotate PDF at a particular page for particular angle
+8. Rotate first page
+9. Encrypt pdf
 '''
 **********************************************************************************************************
 
@@ -150,3 +152,46 @@ def rotate_pdf(pdf_path, page_num: int, rotation: int = 90):
 
 
 rotate_pdf(pdf_path, page,angle)
+
+file_to_rotate = open("doc_to_rotate.pdf", "rb")
+reader = PdfReader(file_to_rotate)
+**************************************************************************************************************************************
+#assume we wish to rotate the first page
+page = reader.pages[0]
+#rotate 90 
+page.rotate(90)
+
+writer = PdfWriter()
+writer.add_page(page)
+#the resulting pdf has one page which we save it
+result = open('rotatedpage.pdf', 'wb')
+writer.write(result)
+
+result.close()
+file_to_rotate.close()
+
+************************************************************************************************************************8
+#to add an encryption
+secret = open('pdf_to_encrypt.pdf', 'rb')
+reader = PdfReader(secret)
+writer = PdfWriter()
+
+for page_num in range(len(reader.pages)):
+    page = reader.pages[page_num]
+    writer.add_page(page)
+    
+#first arg[user password: viewing]
+#second arg[owner password]: print, comment, extaract text
+#If only one string argument is passed to encrypt(), 
+#it will be used for both passwords. 
+#password is swordfish
+
+writer.encrypt('swordfish')
+encryptedDoc = open('encrypteddoc.pdf', 'wb')
+writer.write(encryptedDoc)
+
+secret.close()
+encryptedDoc.close()
+
+
+
