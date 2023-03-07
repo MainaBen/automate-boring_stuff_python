@@ -11,3 +11,4 @@ These exrcises and ideas are based on the book, Automate Boring Stuff
           7. Rotate PDF at a particular page for particular angle
           8. Rotate first page
           9. Encrypt pdf
+          10. Combine two pdfs
