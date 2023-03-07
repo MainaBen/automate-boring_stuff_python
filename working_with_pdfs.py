@@ -192,6 +192,46 @@ writer.write(encryptedDoc)
 
 secret.close()
 encryptedDoc.close()
+******************************************************************************************************************************
+#Combining two pdfs into one
+#open both files in read binary
+march_pdf = open("minutes1.pdf", 'rb')
+jan_pdf = open('minutes2.pdf', 'rb')
+
+
+
+#PDF reader object for both pdfs
+reader_march = PdfReader(march_pdf)
+reader_jan = PdfReader(jan_pdf)
+
+#pdf writer object for blank pdf
+new_pdf = PdfWriter()
+
+#copy all pages from the two pdfs to a write object
+#Loop through the pages march and jan pdf
+
+for page_num in range(len(reader_jan.pages)):
+    #get the page object for the current page
+    
+    page = reader_jan.pages[page_num]
+    
+    #add the page object to the PDF writer object
+    new_pdf.add_page(page)
+    
+for page_num in range(len(reader_march.pages)):
+    #get the page object for the current page
+    
+    page = reader_march.pages[page_num]
+    
+    #add the page object to the PDF writer object
+    new_pdf.add_page(page)
+    
+output_file = open("combined_minutes.pdf", "wb")
+new_pdf.write(output_file)
+output_file.close()
+
+march_pdf.close()
+jan_pdf.close()
 
 
 
