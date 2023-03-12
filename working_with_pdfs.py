@@ -182,8 +182,7 @@ for page_num in range(len(reader.pages)):
     
 #first arg[user password: viewing]
 #second arg[owner password]: print, comment, extaract text
-#If only one string argument is passed to encrypt(), 
-#it will be used for both passwords. 
+#If only one string argument is passed to encrypt(), #it will be used for both passwords. 
 #password is swordfish
 
 writer.encrypt('swordfish')
